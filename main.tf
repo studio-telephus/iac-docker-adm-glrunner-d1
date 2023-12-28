@@ -21,8 +21,5 @@ module "container_adm_glrunner_d2" {
   environment = {
     RANDOM_STRING                  = "b016a2c3-416f-41db-b868-de14fea83b4e"
     GITLAB_RUNNER_REGISTRATION_KEY = var.gitlab_runner_registration_key
-    DOCKER_REMOTE_ORIGIN           = var.docker_remote_origin
-    DOCKER_REMOTE_SA_USERNAME      = var.docker_remote_sa_username
-    DOCKER_REMOTE_SA_TOKEN         = var.docker_remote_sa_token
   }
 }

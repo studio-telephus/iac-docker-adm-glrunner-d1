@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 : "${GITLAB_RUNNER_REGISTRATION_KEY?}"
-: "${DOCKER_REMOTE_ORIGIN?}"
-: "${DOCKER_REMOTE_SA_USERNAME?}"
-: "${DOCKER_REMOTE_SA_TOKEN?}"
 
 ##
 echo "Install the base tools"
@@ -52,10 +49,3 @@ $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 echo "Install Docker Engine."
 apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io
-
-## Configuration
-echo "Docker login."
-docker login \
-  --username ${DOCKER_REMOTE_SA_USERNAME} \
-  --password ${DOCKER_REMOTE_SA_TOKEN} \
-  ${DOCKER_REMOTE_ORIGIN}
