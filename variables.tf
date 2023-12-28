@@ -5,7 +5,7 @@ variable "gitlab_runner_registration_key" {
 
 variable "docker_remote_origin" {
   type    = string
-  default = "artifactory.adm.acme.corp:18443"
+  default = "nexus.adm.acme.corp:18443"
 }
 
 variable "docker_remote_sa_username" {
