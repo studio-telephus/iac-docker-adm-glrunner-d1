@@ -1,4 +1,4 @@
-variable "gitlab_runner_registration_key" {
-  type      = string
-  sensitive = true
+variable "env" {
+  type    = string
+  default = "adm"
 }
