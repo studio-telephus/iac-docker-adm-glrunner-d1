@@ -33,7 +33,8 @@ module "container_gitlab_runner" {
   hostname     = local.container_name
   exec_enabled = true
   exec         = "/mnt/register.sh"
-  privileged = true
+  privileged   = true
+
   environment = {
     GITLAB_ADDRESS                 = local.gitlab_address
     GITLAB_RUNNER_REGISTRATION_KEY = module.bw_gitlab_runner_registration_key.data.password

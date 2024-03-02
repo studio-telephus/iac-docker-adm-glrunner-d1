@@ -11,5 +11,5 @@ gitlab-runner register \
     --non-interactive \
     --url $GITLAB_ADDRESS \
     --registration-token "$GITLAB_RUNNER_REGISTRATION_KEY" \
-    --tag-list "k3s-dev,terraform,bw" \
+    --tag-list "docker" \
     --executor shell
