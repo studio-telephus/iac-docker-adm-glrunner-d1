@@ -2,8 +2,7 @@ locals {
   name              = "glrunner-d1"
   docker_image_name = "tel-${var.env}-${local.name}"
   container_name    = "container-${var.env}-${local.name}"
-  fqdn              = "gitlab.docker.${var.env}.acme.corp"
-  gitlab_address    = "https://${local.fqdn}/gitlab"
+  gitlab_address    = "https://gitlab.docker.adm.acme.corp/gitlab"
 }
 
 resource "docker_image" "gitlab_runner" {
@@ -19,6 +18,10 @@ resource "docker_image" "gitlab_runner" {
   }
 }
 
+resource "docker_volume" "docker_varlib" {
+  name = "volume-${var.env}-${local.name}-docker-varlib"
+}
+
 resource "docker_volume" "gitlab_runner_home" {
   name = "volume-${var.env}-${local.name}-home"
 }
@@ -30,7 +33,7 @@ module "container_gitlab_runner" {
   hostname     = local.container_name
   exec_enabled = true
   exec         = "/mnt/register.sh"
-
+  privileged = true
   environment = {
     GITLAB_ADDRESS                 = local.gitlab_address
     GITLAB_RUNNER_REGISTRATION_KEY = module.bw_gitlab_runner_registration_key.data.password
@@ -47,6 +50,11 @@ module "container_gitlab_runner" {
     {
       volume_name    = docker_volume.gitlab_runner_home.name
       container_path = "/home/gitlab-runner"
+      read_only      = false
+    },
+    {
+      volume_name    = docker_volume.docker_varlib.name
+      container_path = "/var/lib/docker"
       read_only      = false
     }
   ]
