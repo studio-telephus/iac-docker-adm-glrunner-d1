@@ -50,5 +50,4 @@ module "container_gitlab_runner" {
       read_only      = false
     }
   ]
-
 }
